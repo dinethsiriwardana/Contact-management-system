@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.App {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+th,
+td {
+  padding: 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+td {
+  background-color: #fff;
+}
+
+tr:hover td {
+  background-color: #f8f8f8;
+}
+
+button,
+input[type="submit"] {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.update-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.search-bar {
+  margin-bottom: 15px;
+}
+
+.search-input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 50%;
+}
+
+.add-contact-form {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
