@@ -1,0 +1,35 @@
+services:
+  backend:
+    container_name: express-backend
+    build: ./backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/usr/src/app
+    restart: always
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    env_file:
+      - ./backend/.env # Reference to the .env file
+
+  frontend:
+    container_name: react-frontend
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+    restart: always
+
+  mongo:
+    container_name: mongo_db_cmt
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+volumes:
+  mongo-data:
