@@ -5,7 +5,6 @@ import AddIcon from "@mui/icons-material/Add";
 import ContactList from "./components/ContactList";
 import SearchBar from "./components/SearchBar";
 import AddContact from "./components/AddContact";
-import config from "./config"; // Import the config file
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -16,13 +15,15 @@ function App() {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  const apiUrl = window.config.API_URL;
+
   useEffect(() => {
     fetchContacts();
   }, []);
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get(`${config.API_BASE_URL}/showdata`);
+      const response = await axios.get(`${apiUrl}/showdata`);
       setContacts(response.data.contacts);
       setFilteredContacts(response.data.contacts);
     } catch (error) {
@@ -42,7 +43,7 @@ function App() {
 
   const handleAddContact = async (newContact) => {
     try {
-      await axios.post(`${config.API_BASE_URL}/adddata`, newContact);
+      await axios.post(`${apiUrl}/adddata`, newContact);
       fetchContacts();
     } catch (error) {
       console.error("Error adding contact:", error);
@@ -51,10 +52,9 @@ function App() {
 
   const handleUpdateContact = async (updatedContact) => {
     try {
-      await axios.put(
-        `${config.API_BASE_URL}/updatedata/${updatedContact.name}`,
-        { contact: updatedContact.contact }
-      );
+      await axios.put(`${apiUrl}/updatedata/${updatedContact.name}`, {
+        contact: updatedContact.contact,
+      });
       fetchContacts();
     } catch (error) {
       console.error("Error updating contact:", error);
@@ -63,7 +63,7 @@ function App() {
 
   const handleDeleteContact = async (name) => {
     try {
-      await axios.delete(`${config.API_BASE_URL}/deletedata/${name}`);
+      await axios.delete(`${apiUrl}/deletedata/${name}`);
       fetchContacts();
     } catch (error) {
       console.error("Error deleting contact:", error);
