@@ -29,6 +29,7 @@ RUN npm install -g serve
 COPY --from=build /app/build ./build
 
 # Expose port 3000 (default port for serve)
+USER 10014
 EXPOSE 3000
 
 # Run the command to start the server

@@ -18,4 +18,4 @@ ENV NODE_ENV production
 USER 10014
 EXPOSE 3001
 
-CMD ["node", "index.js"]
+CMD ["npm", "run", "start"]
