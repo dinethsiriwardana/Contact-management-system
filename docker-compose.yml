@@ -1,7 +1,8 @@
 services:
   backend:
-    container_name: express-backend
+    container_name: cms-backend
     build: ./backend
+    image: custom-backend-image
     ports:
       - "3001:3001"
     volumes:
@@ -15,8 +16,9 @@ services:
       - ./backend/.env # Reference to the .env file
 
   frontend:
-    container_name: react-frontend
+    container_name: cms-frontend
     build: ./frontend
+    image: cms-frontend-image
     ports:
       - "3000:3000"
     volumes:

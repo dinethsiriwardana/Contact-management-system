@@ -1,21 +1,35 @@
-FROM node:18
+# Use an official Node runtime as a parent image
+FROM node:18 as build
 
-# Update vulnerable packages without pinning to specific versions
-RUN apt-get update && \
-    apt-get install -y git=1:2.39.5-0+deb12u1 libexpat1 libexpat1-dev && \
-    apt-get clean
+# Set the working directory in the container
+WORKDIR /app
 
-WORKDIR /usr/src/app
-
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
+# Copy the rest of the app
 COPY . .
 
-ENV NODE_ENV production
+# Build the React application
+RUN npm run build
 
-USER 10014
+# Start a new stage for the production image
+FROM node:18-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Install serve globally
+RUN npm install -g serve
+
+# Copy built files from the previous stage
+COPY --from=build /app/build ./build
+
+# Expose port 3000 (default port for serve)
 EXPOSE 3000
 
-CMD ["npm", "start"]
+# Run the command to start the server
+CMD ["serve", "-s", "build"]
